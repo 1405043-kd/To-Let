@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">To Let</string>
+    <string name="title_activity_post_add">PostAdd</string>
+</resources>
