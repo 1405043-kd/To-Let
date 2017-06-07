@@ -14,8 +14,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import java.io.Serializable;
 
 import static com.example.user.tolet.R.layout.activity_main;
+import static com.example.user.tolet.R.layout.task_row;
 
 public class PostAdd extends AppCompatActivity {
     public static final int RESULT_LOAD_IMAGE=1;
@@ -27,11 +29,11 @@ public class PostAdd extends AppCompatActivity {
     EditText editText5;
     EditText editText6;
     TextView textView;
-    Button imb;
+    Button post;
     Switch aSwitch;
     ImageButton imageButton;
     ImageView imageView;
-
+    TaskItem taskItem=new TaskItem();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class PostAdd extends AppCompatActivity {
         editText5=(EditText) findViewById(R.id.postAddress);
         editText6=(EditText) findViewById(R.id.contactNo);
         textView=(TextView) findViewById(R.id.currState);
-        imb=(Button)findViewById(R.id.postButton);
+        post=(Button)findViewById(R.id.postButton);
         aSwitch=(Switch) findViewById(R.id.switcha);
         imageButton=(ImageButton) findViewById(R.id.imageButtonPic);
         imageView=(ImageView)findViewById(R.id.imageView);
@@ -73,17 +75,21 @@ public class PostAdd extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.houseNO);
         String message = editText.getText().toString();
+
+        taskItem.HouseNo=message;
         editText = (EditText) findViewById(R.id.road);
-        message+=", "+editText.getText().toString();
+        message=editText.getText().toString();
+        taskItem.RoadNo=message;
         editText = (EditText) findViewById(R.id.Thana);
-        message+=" "+editText.getText().toString();
+        message=editText.getText().toString();
+        taskItem.Thana=message;
         editText = (EditText) findViewById(R.id.district);
-        message+=", "+editText.getText().toString();
+        message=editText.getText().toString();
+        taskItem.District=message;
         editText = (EditText) findViewById(R.id.postAddress);
-        message+="- "+editText.getText().toString();
-
-        intent.putExtra(EXTRA_MESSAGE, message);
+        message=editText.getText().toString();
+        taskItem.PostAddress=message;
+        intent.putExtra("postObject", taskItem);
         startActivity(intent);
-
     }
 }

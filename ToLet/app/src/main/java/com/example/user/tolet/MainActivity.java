@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
@@ -26,52 +27,64 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.user.tolet";
     TextView textView;
     ImageButton imageButton;
-    EditText editText1,editText2;
+  //  EditText editText1,editText2;
     ListView listView;
-    public static final AD ad=new AD();
+    TaskItem taskItem;
+   // public static final AD ad=new AD();
+    static final AD ad=new AD();
+    public static databaseHelp sqLiteHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
-        String message = intent.getStringExtra(PostAdd.EXTRA_MESSAGE);
+        //String message = intent.getStringExtra(PostAdd.EXTRA_MESSAGE);
+      //  taskItem=intent.getSerializableExtra("postObject");
+        taskItem=(TaskItem)intent.getSerializableExtra("postObject");
 
-
+        // / System.out.println(taskItem.getHouseNo());
+        sqLiteHelper=new databaseHelp(this,"adDB.sqlite",null,1);
+        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS ADS(Id INTEGER PRIMARY KEY AUTOINCREMENT, houseNO VARCHAR, roadNO VARCHAR, thana VARCHAR, image BLOB)");
         listView=(ListView) findViewById(R.id.listV);
         textView=(TextView) findViewById(R.id.textView8);
-        editText1=(EditText)findViewById(R.id.editText4);
-        editText2=(EditText) findViewById(R.id.editText5);
-        imageButton=(ImageButton)findViewById(R.id.imageButton);
-        //   imgB=(ImageButton)findViewById(R.id.imageButton2);
-        // items=new ArrayList<TaskItem>();
+       // editText1=(EditText)findViewById(R.id.editText4);
+      //  editText2=(EditText) findViewById(R.id.editText5);
+      //  imageButton=(ImageButton)findViewById(R.id.imageButton);
+        // imgB=(ImageButton)findViewById(R.id.imageButton2);
+       // ad.items=new ArrayList<TaskItem>(); //item initialize hoilo
 
 
-        //  final ArrayAdapter<TaskItem> adapter=new ArrayAdapter<TaskItem>(this,android.R.layout.task_row,items);
-        //  final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
+
+        // final ArrayAdapter<TaskItem> adapter=new ArrayAdapter<TaskItem>(this,android.R.layout.task_row,items);
+        // final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
         final ArrayAdapter adapter=new Addap();
         listView.setAdapter(adapter);
-
-        ad.items.add(new TaskItem(message,"Apmas"));
+        if(taskItem!=null){
+            ad.items.add(taskItem);
+            adapter.notifyDataSetChanged();
+        }
+      //  ad.items.add(taskItem);
         adapter.notifyDataSetChanged();
-
-        imageButton.setOnClickListener(new View.OnClickListener() {
+    //    editText1.setText(items.get(1).getHouseNo());
+    /*    imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s=editText2.getText().toString();
                 String q=editText1.getText().toString();
-                ad.items.add(new TaskItem(s,q));
+                ad.items.add(new TaskItem(s,q,"","","",""));
                 adapter.notifyDataSetChanged();
                 editText1.setText("");
                 editText2.setText("");
                 //      setContentView(R.layout.activity_main2);
             }
-        });
+        }); */
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                textView.setText(ad.items.get(i).csu.toString());
+                textView.setText(ad.items.get(i).getHouseNo());
+             //   System.out.println(ad.items.get(i).getHouseNo());
                 sendMessageToAdPage(view);
             }
         });
@@ -95,14 +108,16 @@ public class MainActivity extends AppCompatActivity {
         //setContentView(R.layout.activity_post_add);
         Intent intent=new Intent(this,AdPage.class);
         TextView textView;
-        textView = (TextView) findViewById(R.id.baa);
-        String message =textView.getText().toString();
+     //   textView = (TextView) findViewById(R.id.baa);
+      //  String message =textView.getText().toString();
 
-        intent.putExtra(EXTRA_MESSAGE, message);
+        intent.putExtra("postObject", taskItem);
         startActivity(intent);
         //   adapter.notifyDataSetChanged();
     }
 
+
+///arrayAdapter listView
     public class Addap extends ArrayAdapter<TaskItem>{
         public Addap() {
             super(getApplicationContext(), R.layout.task_row,ad.items);
@@ -120,10 +135,14 @@ public class MainActivity extends AppCompatActivity {
             t1=(TextView)v.findViewById(R.id.ba);
             t2=(TextView)v.findViewById(R.id.baa);
             imageBun=(ImageView) v.findViewById(R.id.xxx);
-
-            t1.setText(ad.items.get(position).tsk);
-            t2.setText(ad.items.get(position).csu);
-
+          //  if(ad.items.get(position).getHouseNo()==null)
+            t1.setText(ad.items.get(position).getHouseNo());
+            t2.setText(ad.items.get(position).getThana());
+           // ad.items.get(position).getHouseNo();
+          //  if(ad.items.get(position).getHouseNo()!=null)
+               // t1.setText(ad.items.get(position).toString());
+            // t1.setText(ad.items.get(position).HouseNo);
+            // t2.setText(ad.items.get(position).RoadNo);
             imageBun.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
@@ -131,10 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     notifyDataSetChanged();
                 }
             });
-
             return v;
-
-
         }
     }
 }

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.60"
         android:onClick="sendMessage"
-        android:text="Button" />
+        android:text="Post New Ad" />
 
     <TextView
         android:id="@+id/textView8"
@@ -36,42 +36,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1.92"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/linLayV"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editText5"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Name"
-                android:inputType="text|textPersonName"
-                android:visibility="visible" />
-
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:ems="10"
-                android:hint="Ja khushi"
-                android:inputType="text|textPersonName"
-                android:visibility="visible" />
-
-        </LinearLayout>
-
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            app:srcCompat="@android:drawable/ic_input_add" />
 
     </LinearLayout>
 
