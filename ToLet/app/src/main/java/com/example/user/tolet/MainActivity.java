@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     TaskItem taskItem;
    // public static final AD ad=new AD();
     static final AD ad=new AD();
-    public static databaseHelp sqLiteHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             imageBun=(ImageView) v.findViewById(R.id.xxx);
           //  if(ad.items.get(position).getHouseNo()==null)
             t1.setText(ad.items.get(position).getHouseNo());
-            t2.setText(ad.items.get(position).getThana());
+            t2.setText(ad.items.get(position).getContactNo());
            // ad.items.get(position).getHouseNo();
           //  if(ad.items.get(position).getHouseNo()!=null)
                // t1.setText(ad.items.get(position).toString());

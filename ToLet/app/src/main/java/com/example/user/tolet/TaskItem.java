@@ -1,6 +1,11 @@
 package com.example.user.tolet;
 
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.widget.ImageView;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by USER on 5/29/2017.
@@ -14,7 +19,16 @@ public class TaskItem implements Serializable {
     public String PostAddress;
     public String ContactNo;
     public String isBachelor;
+    public ArrayList<Uri> imageArray;
+    public ImageView imageView;
+    public byte[] byteImage;
     public TaskItem(){}
+    public Bitmap bitmap;
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
     public TaskItem(String house, String road, String thana, String district, String postAddress, String contactNo) {
         HouseNo=house;
         RoadNo=road;
@@ -22,6 +36,9 @@ public class TaskItem implements Serializable {
         District=district;
         PostAddress=postAddress;
         ContactNo=contactNo;
+        imageArray = new ArrayList<>();
+        bitmap=null;
+
     }
 
     public String getHouseNo() {
@@ -50,6 +67,10 @@ public class TaskItem implements Serializable {
 
     public String getIsBachelor() {
         return isBachelor;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     @Override

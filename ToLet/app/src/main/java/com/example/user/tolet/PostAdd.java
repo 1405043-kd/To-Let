@@ -1,8 +1,11 @@
 package com.example.user.tolet;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -13,19 +16,16 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
-import java.io.Serializable;
 
-import static com.example.user.tolet.MainActivity.sqLiteHelper;
-import static com.example.user.tolet.R.layout.activity_main;
-import static com.example.user.tolet.R.layout.task_row;
+
 
 public class PostAdd extends AppCompatActivity {
-    public static final int RESULT_LOAD_IMAGE=1;
+    public static final int SELECTED_PICTURE=1;
     public static final String EXTRA_MESSAGE = "com.example.user.tolet";
+    Bitmap selectedImage;
     EditText editText1;
     EditText editText2;
     EditText editText3;
@@ -36,9 +36,10 @@ public class PostAdd extends AppCompatActivity {
     Button post;
     CheckBox aSwitch;
     ImageButton imageButton;
-    ImageView imageView;
+    ImageView imageView=null;
     TaskItem taskItem=new TaskItem();
-
+    byte[] byteArr;
+    public static DatabaseHelper db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +54,14 @@ public class PostAdd extends AppCompatActivity {
         post=(Button)findViewById(R.id.postButton);
         aSwitch=(CheckBox) findViewById(R.id.switcha);
         imageButton=(ImageButton) findViewById(R.id.imageButtonPic);
-        imageView=(ImageView)findViewById(R.id.imageView);
-        sqLiteHelper=new databaseHelp(this,"adDB.sqlite",null,1);
+        db = new DatabaseHelper(getBaseContext());
+
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent galleryIntent =new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(galleryIntent,RESULT_LOAD_IMAGE);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, SELECTED_PICTURE);
             }
         });
 
@@ -68,11 +69,23 @@ public class PostAdd extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==RESULT_LOAD_IMAGE && resultCode==RESULT_OK && data!=null){
-            Uri selectedImage=data.getData();
-            imageView.setImageURI(selectedImage);
-     //       Bitmap bitmap=(BitmapDrawable) imageView.getDrawable().getBitMap();
+        if(requestCode == SELECTED_PICTURE && resultCode == RESULT_OK && data != null){
+        //    System.out.println("111111111111111111111111111111111111111111111111");
+            Uri uri = data.getData();
+            String[] projection = {MediaStore.Images.Media.DATA};
 
+            Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
+            cursor.moveToFirst();
+
+            int column_index = cursor.getColumnIndex(projection[0]);
+            String filePath = cursor.getString(column_index);
+            cursor.close();
+
+            selectedImage  = BitmapFactory.decodeFile(filePath);
+
+            Drawable d = new BitmapDrawable(selectedImage);
+         //   imageView.setImageBitmap(selectedImage);
+         //   imageButton.setImageBitmap(selectedImage);
         }
     }
     private byte[] imageViewToByte(ImageView image) {
@@ -116,6 +129,7 @@ public class PostAdd extends AppCompatActivity {
               //  taskItem.getRoadNo().toString().trim()
             //    imageViewToByte(imageView)
     //    );
+        taskItem.bitmap=selectedImage;
         intent.putExtra("postObject", taskItem);
         startActivity(intent);
     }
