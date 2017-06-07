@@ -43,8 +43,7 @@ public class MainActivity extends AppCompatActivity {
         taskItem=(TaskItem)intent.getSerializableExtra("postObject");
 
         // / System.out.println(taskItem.getHouseNo());
-        sqLiteHelper=new databaseHelp(this,"adDB.sqlite",null,1);
-        sqLiteHelper.queryData("CREATE TABLE IF NOT EXISTS ADS(Id INTEGER PRIMARY KEY AUTOINCREMENT, houseNO VARCHAR, roadNO VARCHAR, thana VARCHAR, image BLOB)");
+
         listView=(ListView) findViewById(R.id.listV);
         textView=(TextView) findViewById(R.id.textView8);
        // editText1=(EditText)findViewById(R.id.editText4);

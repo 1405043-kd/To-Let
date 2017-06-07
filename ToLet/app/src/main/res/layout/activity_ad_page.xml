@@ -7,45 +7,47 @@
     tools:context="com.example.user.tolet.AdPage">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="458dp"
         android:layout_height="495dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        android:weightSum="1"
         app:layout_constraintDimensionRatio="w,1:1"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="5dp">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="AD No."
-            android:textSize="36sp" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="asdf"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="-11dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
-
-        <TextView
-            android:id="@+id/textView5"
+        <ImageView
+            android:id="@+id/imageView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_weight=".5"
+            app:srcCompat="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/details"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5" />
+
+        <Button
+            android:id="@+id/btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:elevation="0dp"
+            android:text="Book this house" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="advertisement"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            tools:layout_editor_absoluteX="72dp"
+            tools:layout_editor_absoluteY="507dp" />
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

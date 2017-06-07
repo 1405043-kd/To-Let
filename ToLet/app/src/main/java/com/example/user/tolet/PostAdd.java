@@ -14,8 +14,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import java.io.ByteArrayOutputStream;
 import java.io.Serializable;
 
+import static com.example.user.tolet.MainActivity.sqLiteHelper;
 import static com.example.user.tolet.R.layout.activity_main;
 import static com.example.user.tolet.R.layout.task_row;
 
@@ -50,6 +53,8 @@ public class PostAdd extends AppCompatActivity {
         aSwitch=(Switch) findViewById(R.id.switcha);
         imageButton=(ImageButton) findViewById(R.id.imageButtonPic);
         imageView=(ImageView)findViewById(R.id.imageView);
+        sqLiteHelper=new databaseHelp(this,"adDB.sqlite",null,1);
+
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,6 +73,13 @@ public class PostAdd extends AppCompatActivity {
      //       Bitmap bitmap=(BitmapDrawable) imageView.getDrawable().getBitMap();
 
         }
+    }
+    private byte[] imageViewToByte(ImageView image) {
+        Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
     }
 
 
@@ -89,6 +101,11 @@ public class PostAdd extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.postAddress);
         message=editText.getText().toString();
         taskItem.PostAddress=message;
+      //  sqLiteHelper.insertData(
+              //  taskItem.getHouseNo().toString().trim(),
+              //  taskItem.getRoadNo().toString().trim()
+            //    imageViewToByte(imageView)
+    //    );
         intent.putExtra("postObject", taskItem);
         startActivity(intent);
     }

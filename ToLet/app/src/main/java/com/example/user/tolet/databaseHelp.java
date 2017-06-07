@@ -17,7 +17,9 @@ public class databaseHelp extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-
+        sqLiteDatabase.execSQL(
+                "CREATE TABLE IF NOT EXISTS ADS(Id INTEGER PRIMARY KEY AUTOINCREMENT, houseNO VARCHAR)"
+        );
     }
 
     @Override
@@ -33,16 +35,16 @@ public class databaseHelp extends SQLiteOpenHelper {
         SQLiteDatabase database = getReadableDatabase();
         return database.rawQuery(sql, null);
     }
-    public void insertData(String name, String price, byte[] image){
+    public void insertData(String name, String price){
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "INSERT INTO RENTADS VALUES (NULL, ?, ?, ?)";
+        String sql = "INSERT INTO RENTADS VALUES (NULL, ?, ?)";
 
         SQLiteStatement statement = database.compileStatement(sql);
         statement.clearBindings();
 
         statement.bindString(1, name);
         statement.bindString(2, price);
-        statement.bindBlob(3, image);
+     //   statement.bindBlob(3, image);
 
         statement.executeInsert();
     }
