@@ -80,16 +80,13 @@
             android:hint="Contact No."
             android:inputType="phone" />
 
-        <Switch
+        <CheckBox
             android:id="@+id/switcha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:padding="15dp"
-            android:paddingBottom="20dp"
-            android:paddingEnd="10dp"
-            android:text="Bachelor"
-            android:textSize="24sp" />
+            android:elevation="24dp"
+            android:text="Bachelor" />
 
         <LinearLayout
             android:layout_width="match_parent"

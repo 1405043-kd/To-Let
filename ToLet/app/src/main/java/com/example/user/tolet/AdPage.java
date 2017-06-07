@@ -21,6 +21,21 @@ public class AdPage extends AppCompatActivity {
         Intent intent = getIntent();
         taskItem=(TaskItem)intent.getSerializableExtra("postObject");
         //textView2.setText("eijonnoi");
-        textView1.setText("aa");
+        String whatToShow="";
+        if(taskItem.getHouseNo()!=null)
+            whatToShow+=taskItem.getHouseNo()+"\n";
+        if(taskItem.getRoadNo()!=null)
+            whatToShow+=taskItem.getRoadNo()+"\n";
+        if(taskItem.getThana()!=null)
+            whatToShow+=taskItem.getThana()+"\n";
+        if(taskItem.getDistrict()!=null)
+            whatToShow+=taskItem.getDistrict()+"\n";
+        if(taskItem.getPostAddress()!=null)
+            whatToShow+=taskItem.getPostAddress()+"\n";
+        if(taskItem.getContactNo()!=null)
+            whatToShow+=taskItem.getContactNo()+"\n";
+        if(taskItem.getIsBachelor()!=null)
+            whatToShow+=taskItem.getIsBachelor();
+        textView1.setText(whatToShow);
     }
 }

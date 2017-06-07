@@ -13,6 +13,7 @@ public class TaskItem implements Serializable {
     public String District;
     public String PostAddress;
     public String ContactNo;
+    public String isBachelor;
     public TaskItem(){}
     public TaskItem(String house, String road, String thana, String district, String postAddress, String contactNo) {
         HouseNo=house;
@@ -45,6 +46,10 @@ public class TaskItem implements Serializable {
 
     public String getContactNo() {
         return ContactNo;
+    }
+
+    public String getIsBachelor() {
+        return isBachelor;
     }
 
     @Override

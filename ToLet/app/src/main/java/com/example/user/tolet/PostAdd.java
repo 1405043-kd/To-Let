@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -33,7 +34,7 @@ public class PostAdd extends AppCompatActivity {
     EditText editText6;
     TextView textView;
     Button post;
-    Switch aSwitch;
+    CheckBox aSwitch;
     ImageButton imageButton;
     ImageView imageView;
     TaskItem taskItem=new TaskItem();
@@ -50,7 +51,7 @@ public class PostAdd extends AppCompatActivity {
         editText6=(EditText) findViewById(R.id.contactNo);
         textView=(TextView) findViewById(R.id.currState);
         post=(Button)findViewById(R.id.postButton);
-        aSwitch=(Switch) findViewById(R.id.switcha);
+        aSwitch=(CheckBox) findViewById(R.id.switcha);
         imageButton=(ImageButton) findViewById(R.id.imageButtonPic);
         imageView=(ImageView)findViewById(R.id.imageView);
         sqLiteHelper=new databaseHelp(this,"adDB.sqlite",null,1);
@@ -101,6 +102,15 @@ public class PostAdd extends AppCompatActivity {
         editText = (EditText) findViewById(R.id.postAddress);
         message=editText.getText().toString();
         taskItem.PostAddress=message;
+        editText = (EditText) findViewById(R.id.contactNo);
+        message=editText.getText().toString();
+        taskItem.ContactNo=message;
+        editText = (EditText) findViewById(R.id.postAddress);
+        message=editText.getText().toString();
+        taskItem.PostAddress=message;
+        aSwitch=(CheckBox) findViewById(R.id.switcha);
+        if(aSwitch.isChecked()) taskItem.isBachelor="Bachelor allowed";
+        else taskItem.isBachelor="Bachelor not allowed";
       //  sqLiteHelper.insertData(
               //  taskItem.getHouseNo().toString().trim(),
               //  taskItem.getRoadNo().toString().trim()
