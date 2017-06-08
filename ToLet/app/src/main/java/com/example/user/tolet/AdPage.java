@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static com.example.user.tolet.PostAdd.dbH;
+
 public class AdPage extends AppCompatActivity {
     TextView textView1;
     ImageView imageView;

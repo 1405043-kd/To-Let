@@ -127,8 +127,9 @@ public class PostAdd extends AppCompatActivity {
         aSwitch=(CheckBox) findViewById(R.id.switcha);
         if(aSwitch.isChecked()) taskItem.isBachelor="Bachelor allowed";
         else taskItem.isBachelor="Bachelor not allowed";
-        taskItem.byteImage=(byteArr == null) ? null : byteArr.clone();
-     //   dbH.insertData(taskItem);
+      //  taskItem.byteImage=(byteArr == null) ? null : byteArr.clone();
+        System.out.println("ahehe");
+        dbH.insertData(taskItem);
 
         intent.putExtra("postObject", taskItem);
         startActivity(intent);

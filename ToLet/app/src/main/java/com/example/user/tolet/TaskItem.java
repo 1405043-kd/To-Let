@@ -37,7 +37,7 @@ public class TaskItem implements Serializable {
         District=district;
         PostAddress=postAddress;
         ContactNo=contactNo;
-        imageArray = new ArrayList<>();
+
 
 
     }

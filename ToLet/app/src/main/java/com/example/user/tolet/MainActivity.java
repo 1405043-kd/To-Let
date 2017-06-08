@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         // final ArrayAdapter<TaskItem> adapter=new ArrayAdapter<TaskItem>(this,android.R.layout.task_row,items);
         // final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
-        final ArrayAdapter adapter=new Addap();
+        ArrayAdapter adapter=new Addap();
         listView.setAdapter(adapter);
         if(taskItem!=null){
             ad.items.add(taskItem);
@@ -121,6 +121,9 @@ public class MainActivity extends AppCompatActivity {
     public class Addap extends ArrayAdapter<TaskItem>{
         public Addap() {
             super(getApplicationContext(), R.layout.task_row,ad.items);
+            //ad.items.add(taskItem);
+            //Cursor nia basically ekhane kisu code thaka uchit
+
         }
 
         @NonNull

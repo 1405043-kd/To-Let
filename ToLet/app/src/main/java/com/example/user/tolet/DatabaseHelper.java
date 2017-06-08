@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public boolean insertData(TaskItem taskItem) {
         SQLiteDatabase db = this.getWritableDatabase();
         String sql = "INSERT INTO "+ TABLE_NAME + " VALUES (?,?,?,?,?,?,?,?)";
-
+        System.out.println("hehe");
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
@@ -42,7 +42,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         statement.bindString(5, taskItem.getPostAddress());
         statement.bindString(6, taskItem.getContactNo());
         statement.bindString(7, taskItem.getIsBachelor());
-        statement.bindBlob(8, taskItem.byteImage);
+     //   statement.bindBlob(8, taskItem.byteImage);
         statement.executeInsert();
 
         return true;
