@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.widget.ImageView;
 
 import java.io.Serializable;
+import java.net.URI;
 import java.util.ArrayList;
 
 /**
@@ -37,7 +38,7 @@ public class TaskItem implements Serializable {
         PostAddress=postAddress;
         ContactNo=contactNo;
         imageArray = new ArrayList<>();
-        bitmap=null;
+
 
     }
 
@@ -72,6 +73,7 @@ public class TaskItem implements Serializable {
     public Bitmap getBitmap() {
         return bitmap;
     }
+
 
     @Override
     public String toString() {

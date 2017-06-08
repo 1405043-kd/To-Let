@@ -36,12 +36,13 @@ public class PostAdd extends AppCompatActivity {
     Button post;
     CheckBox aSwitch;
     ImageButton imageButton;
-    ImageView imageView=null;
+    ImageView imageView;
     TaskItem taskItem=new TaskItem();
     byte[] byteArr;
-    public static DatabaseHelper db;
+    public static DatabaseHelper dbH;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dbH=new DatabaseHelper(getBaseContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_add);
         editText1=(EditText) findViewById(R.id.houseNO);
@@ -54,7 +55,8 @@ public class PostAdd extends AppCompatActivity {
         post=(Button)findViewById(R.id.postButton);
         aSwitch=(CheckBox) findViewById(R.id.switcha);
         imageButton=(ImageButton) findViewById(R.id.imageButtonPic);
-        db = new DatabaseHelper(getBaseContext());
+        imageView=(ImageView) findViewById(R.id.imageV);
+
 
 
         imageButton.setOnClickListener(new View.OnClickListener() {
@@ -72,20 +74,22 @@ public class PostAdd extends AppCompatActivity {
         if(requestCode == SELECTED_PICTURE && resultCode == RESULT_OK && data != null){
         //    System.out.println("111111111111111111111111111111111111111111111111");
             Uri uri = data.getData();
-            String[] projection = {MediaStore.Images.Media.DATA};
+        //    String[] projection = {MediaStore.Images.Media.DATA};
 
-            Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
-            cursor.moveToFirst();
+          //  Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
+            //cursor.moveToFirst();
 
-            int column_index = cursor.getColumnIndex(projection[0]);
-            String filePath = cursor.getString(column_index);
-            cursor.close();
+//            int column_index = cursor.getColumnIndex(projection[0]);
+  //          String filePath = cursor.getString(column_index);
+    //        cursor.close();
 
-            selectedImage  = BitmapFactory.decodeFile(filePath);
+      //      selectedImage  = BitmapFactory.decodeFile(filePath);
 
-            Drawable d = new BitmapDrawable(selectedImage);
-         //   imageView.setImageBitmap(selectedImage);
-         //   imageButton.setImageBitmap(selectedImage);
+        //    Drawable d = new BitmapDrawable(selectedImage);
+            imageView.setImageURI(uri);
+            byteArr=imageViewToByte(imageView);
+       //     imageView.setImageDrawable(d);
+         //   imageButton.setImageDrawable(d);
         }
     }
     private byte[] imageViewToByte(ImageView image) {
@@ -101,7 +105,6 @@ public class PostAdd extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.houseNO);
         String message = editText.getText().toString();
-
         taskItem.HouseNo=message;
         editText = (EditText) findViewById(R.id.road);
         message=editText.getText().toString();
@@ -124,12 +127,9 @@ public class PostAdd extends AppCompatActivity {
         aSwitch=(CheckBox) findViewById(R.id.switcha);
         if(aSwitch.isChecked()) taskItem.isBachelor="Bachelor allowed";
         else taskItem.isBachelor="Bachelor not allowed";
-      //  sqLiteHelper.insertData(
-              //  taskItem.getHouseNo().toString().trim(),
-              //  taskItem.getRoadNo().toString().trim()
-            //    imageViewToByte(imageView)
-    //    );
-        taskItem.bitmap=selectedImage;
+        taskItem.byteImage=(byteArr == null) ? null : byteArr.clone();
+     //   dbH.insertData(taskItem);
+
         intent.putExtra("postObject", taskItem);
         startActivity(intent);
     }

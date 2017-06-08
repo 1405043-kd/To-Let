@@ -45,12 +45,14 @@ public class AdPage extends AppCompatActivity {
         textView1.setText(whatToShow);
         //imageView.setImageBitmap(taskItem.bitmap);
        // BitmapDrawable bitmapDrawable = new BitmapDrawable(taskItem.bitmap);
-        Drawable d = new BitmapDrawable(taskItem.bitmap);
-        imageView.setImageDrawable(d);
-      //  Bitmap bmp = BitmapFactory.decodeByteArray(taskItem.byteImage, 0, taskItem.byteImage.length);
-       // imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(),
-         //       imageView.getHeight(), false));
-      //  imageView.setImageURI(taskItem.imageArray.get(1));
+
+       // imageView.setImageDrawable(d);
+        if(taskItem.byteImage!=null) {
+            Bitmap bmp = BitmapFactory.decodeByteArray(taskItem.byteImage, 0, taskItem.byteImage.length);
+            imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(),
+                    imageView.getHeight(), false));
+        }
+            //  imageView.setImageURI(taskItem.imageArray.get(1));
       //  if(taskItem.imageArray.get(0)!=null)
          //   imageView.setImageURI(Uri.parse(taskItem.imageArray.get(0)));
     }

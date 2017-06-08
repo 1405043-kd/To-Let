@@ -2,6 +2,7 @@ package com.example.user.tolet;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.provider.ContactsContract;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                textView.setText(ad.items.get(i).getHouseNo());
+            //    textView.setText(ad.items.get(i).getHouseNo());
              //   System.out.println(ad.items.get(i).getHouseNo());
                 sendMessageToAdPage(view);
             }
@@ -137,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
           //  if(ad.items.get(position).getHouseNo()==null)
             t1.setText(ad.items.get(position).getHouseNo());
             t2.setText(ad.items.get(position).getContactNo());
+
+
            // ad.items.get(position).getHouseNo();
           //  if(ad.items.get(position).getHouseNo()!=null)
                // t1.setText(ad.items.get(position).toString());

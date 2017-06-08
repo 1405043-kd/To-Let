@@ -20,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (TITLE TEXT ,LOCATION TEXT,PRICE TEXT,POSTED_BY TEXT,POSTED_ON TEXT,DESCRIPTION TEXT,ADDRESS TEXT,PHONE TEXT,EMAIL TEXT,IMAGE BLOB,CATEGORY TEXT) ");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (HOUSE TEXT ,ROAD TEXT,THANA TEXT,DISTRICT TEXT, POSTADRS TEXT,CONTACT TEXT,ISBACHELOR TEXT,IMAGE BLOB) ");
     }
 
     @Override
@@ -28,24 +28,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    public boolean insertData(String title,String location,int price,String posted_by,String posted_on,String description,String address,String phone,String email,byte[] image,String category) {
+    public boolean insertData(TaskItem taskItem) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "INSERT INTO "+ TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO "+ TABLE_NAME + " VALUES (?,?,?,?,?,?,?,?)";
 
         SQLiteStatement statement = db.compileStatement(sql);
         statement.clearBindings();
 
-        statement.bindString(1, title);
-        statement.bindString(2, location);
-        statement.bindLong(3, price);
-        statement.bindString(4, posted_by);
-        statement.bindString(5, posted_on);
-        statement.bindString(6, description);
-        statement.bindString(7, address);
-        statement.bindString(8, phone);
-        statement.bindString(9, email);
-        statement.bindBlob(10, image);
-        statement.bindString(11,category);
+        statement.bindString(1, taskItem.getHouseNo());
+        statement.bindString(2, taskItem.getRoadNo());
+        statement.bindString(3, taskItem.getThana());
+        statement.bindString(4, taskItem.getDistrict());
+        statement.bindString(5, taskItem.getPostAddress());
+        statement.bindString(6, taskItem.getContactNo());
+        statement.bindString(7, taskItem.getIsBachelor());
+        statement.bindBlob(8, taskItem.byteImage);
         statement.executeInsert();
 
         return true;
