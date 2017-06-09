@@ -39,6 +39,7 @@
             android:id="@+id/ba"
             android:layout_width="match_parent"
             android:layout_height="25dp"
+            android:gravity="center"
             android:text="TextView"
             android:visibility="visible" />
     </LinearLayout>
