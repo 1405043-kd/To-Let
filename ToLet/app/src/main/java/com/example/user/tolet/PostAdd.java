@@ -19,11 +19,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Arrays;
 
+import static com.example.user.tolet.MainActivity.dbH;
 
 
 public class PostAdd extends AppCompatActivity {
-    public static final int SELECTED_PICTURE=1;
+    public static final int SELECTED_PICTURE=9000;
     public static final String EXTRA_MESSAGE = "com.example.user.tolet";
     Bitmap selectedImage;
     EditText editText1;
@@ -37,13 +39,15 @@ public class PostAdd extends AppCompatActivity {
     CheckBox aSwitch;
     ImageButton imageButton;
     ImageView imageView;
-    TaskItem taskItem=new TaskItem();
-    byte[] byteArr;
-    public static DatabaseHelper dbH;
+    TaskItem taskItem;
+    Bitmap byP;
+    String strURI;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        dbH=new DatabaseHelper(getBaseContext());
+
         super.onCreate(savedInstanceState);
+        taskItem=new TaskItem();
         setContentView(R.layout.activity_post_add);
         editText1=(EditText) findViewById(R.id.houseNO);
         editText2=(EditText) findViewById(R.id.road);
@@ -73,7 +77,7 @@ public class PostAdd extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SELECTED_PICTURE && resultCode == RESULT_OK && data != null){
         //    System.out.println("111111111111111111111111111111111111111111111111");
-            Uri uri = data.getData();
+     /*////////////////////////////////////       Uri uri = data.getData();
         //    String[] projection = {MediaStore.Images.Media.DATA};
 
           //  Cursor cursor = getContentResolver().query(uri,projection,null,null,null);
@@ -86,18 +90,42 @@ public class PostAdd extends AppCompatActivity {
       //      selectedImage  = BitmapFactory.decodeFile(filePath);
 
         //    Drawable d = new BitmapDrawable(selectedImage);
+            imageView.setImageURI(null);
             imageView.setImageURI(uri);
-            byteArr=imageViewToByte(imageView);
+            byteArr=null;
+            byteArr=imageViewToByte(imageView);     ////////////////////////////*/
+
+            Uri selectedImage = data.getData();
+            strURI = selectedImage.toString();
+            Uri imageUri = Uri.parse(strURI);
+            imageView.setImageURI(imageUri);
+       //     String[] filePathColumn = {MediaStore.Images.Media.DATA};
+
+       //     Cursor cursor = getContentResolver().query(selectedImage,
+      //              filePathColumn, null, null, null);
+         //   cursor.moveToFirst();
+
+       //     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+       //     String picturePath = cursor.getString(columnIndex);
+       //     cursor.close();
+       //     byP = BitmapFactory.decodeFile(picturePath);
+        //    taskItem.byteImage=bm;
+       //     imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+
+   //      Bitmap bmp = BitmapFactory.decodeByteArray(byteArr, 0, byteArr.length);
+     //       imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(),
+       //             imageView.getHeight(), false));
        //     imageView.setImageDrawable(d);
          //   imageButton.setImageDrawable(d);
+        }
+        else {
         }
     }
     private byte[] imageViewToByte(ImageView image) {
         Bitmap bitmap = ((BitmapDrawable)image.getDrawable()).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        byte[] byteArray = stream.toByteArray();
-        return byteArray;
+        return stream.toByteArray();
     }
 
 
@@ -127,7 +155,8 @@ public class PostAdd extends AppCompatActivity {
         aSwitch=(CheckBox) findViewById(R.id.switcha);
         if(aSwitch.isChecked()) taskItem.isBachelor="Bachelor allowed";
         else taskItem.isBachelor="Bachelor not allowed";
-      //  taskItem.byteImage=(byteArr == null) ? null : byteArr.clone();
+        taskItem.ImageUri=strURI;
+   //     System.arraycopy(byteArr, 0, taskItem.byteImage, 0, byteArr.length);
         System.out.println("ahehe");
         dbH.insertData(taskItem);
 

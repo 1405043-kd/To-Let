@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import static android.provider.AlarmClock.EXTRA_MESSAGE;
 
+
 public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.user.tolet";
     TextView textView;
@@ -32,19 +33,23 @@ public class MainActivity extends AppCompatActivity {
     ListView listView;
     TaskItem taskItem;
    // public static final AD ad=new AD();
+    public static DatabaseHelper dbH;
     static final AD ad=new AD();
+    static int firstDone=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbH=new DatabaseHelper(getApplicationContext());
         setContentView(R.layout.activity_main);
         Intent intent = getIntent();
         //String message = intent.getStringExtra(PostAdd.EXTRA_MESSAGE);
-      //  taskItem=intent.getSerializableExtra("postObject");
+       // taskItem=intent.getSerializableExtra("postObject");
         taskItem=(TaskItem)intent.getSerializableExtra("postObject");
-
+     //   dbH.insertData(taskItem);
         // / System.out.println(taskItem.getHouseNo());
-
+      //  if(taskItem!=null)
+        //    ad.items.add(taskItem);
         listView=(ListView) findViewById(R.id.listV);
         textView=(TextView) findViewById(R.id.textView8);
        // editText1=(EditText)findViewById(R.id.editText4);
@@ -59,12 +64,12 @@ public class MainActivity extends AppCompatActivity {
         // final ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,items);
         ArrayAdapter adapter=new Addap();
         listView.setAdapter(adapter);
-        if(taskItem!=null){
+        if(taskItem!=null)
             ad.items.add(taskItem);
-            adapter.notifyDataSetChanged();
-        }
-      //  ad.items.add(taskItem);
         adapter.notifyDataSetChanged();
+       // }
+      //  ad.items.add(taskItem);
+    //    adapter.notifyDataSetChanged();
     //    editText1.setText(items.get(1).getHouseNo());
     /*    imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,8 +88,9 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            //    textView.setText(ad.items.get(i).getHouseNo());
+             //   textView.setText(ad.items.get(i).getHouseNo());
              //   System.out.println(ad.items.get(i).getHouseNo());
+                taskItem=ad.items.get(i);
                 sendMessageToAdPage(view);
             }
         });
@@ -121,9 +127,38 @@ public class MainActivity extends AppCompatActivity {
     public class Addap extends ArrayAdapter<TaskItem>{
         public Addap() {
             super(getApplicationContext(), R.layout.task_row,ad.items);
+            TaskItem tItem=new TaskItem();
+         //   tItem.ContactNo="3";
+        //    dbH.insertData(tItem);
+        //    ad.items.add(tItem);
+          //  ad.items.add(tItem);
+          //  ad.items.add(tItem);
             //ad.items.add(taskItem);
             //Cursor nia basically ekhane kisu code thaka uchit
+            if(firstDone==0) {
+                ad.items.clear();
+                Cursor cursor = dbH.getAsRequested("SELECT * FROM ads_info");
+                cursor.moveToFirst();
+                //    String x="";
+                while (cursor.isAfterLast() == false) {
+                    //    //   x = String.valueOf(cursor.getColumnIndex("CONTACT"));
+                    tItem.HouseNo = cursor.getString(cursor.getColumnIndex("HOUSE"));
+                    tItem.RoadNo = cursor.getString(cursor.getColumnIndex("ROAD"));
+                    tItem.Thana = cursor.getString(cursor.getColumnIndex("THANA"));
+                    tItem.District = cursor.getString(cursor.getColumnIndex("DISTRICT"));
+                    tItem.PostAddress = cursor.getString(cursor.getColumnIndex("POSTADRS"));
+                    tItem.isBachelor = cursor.getString(cursor.getColumnIndex("ISBACHELOR"));
+                    tItem.ContactNo = cursor.getString(cursor.getColumnIndex("CONTACT"));
+                    tItem.ImageUri=cursor.getString(cursor.getColumnIndex("IMAGE"));
+                    cursor.moveToNext();
+                    ad.items.add(tItem);
+                }
 
+                firstDone=33;
+            }
+         //   String x= String.valueOf(cursor.getColumnIndex("CONTACT"));
+            TextView texView=(TextView) findViewById(R.id.textView8);
+          //  texView.setText(x);
         }
 
         @NonNull
@@ -138,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
             t1=(TextView)v.findViewById(R.id.ba);
             t2=(TextView)v.findViewById(R.id.baa);
             imageBun=(ImageView) v.findViewById(R.id.xxx);
-          //  if(ad.items.get(position).getHouseNo()==null)
             t1.setText(ad.items.get(position).getHouseNo());
             t2.setText(ad.items.get(position).getContactNo());
 

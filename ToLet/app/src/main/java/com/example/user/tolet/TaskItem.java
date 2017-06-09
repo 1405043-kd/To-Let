@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public class TaskItem implements Serializable {
+    public int iD;
     public String HouseNo;
     public String RoadNo;
     public String Thana;
@@ -20,26 +21,39 @@ public class TaskItem implements Serializable {
     public String PostAddress;
     public String ContactNo;
     public String isBachelor;
-    public ArrayList<Uri> imageArray;
+    public String ImageUri;
+
+    public String getImageUri() {
+        return ImageUri;
+    }
+
     public ImageView imageView;
-    public byte[] byteImage;
-    public TaskItem(){}
-    public Bitmap bitmap;
+    public Bitmap byteImage;
+
+
+
+    public TaskItem(){byteImage=null;}
+
 
     public ImageView getImageView() {
         return imageView;
     }
 
-    public TaskItem(String house, String road, String thana, String district, String postAddress, String contactNo) {
+    public TaskItem(int _id, String house, String road, String thana, String district, String postAddress, String contactNo) {
+        iD=_id;
         HouseNo=house;
         RoadNo=road;
         Thana=thana;
         District=district;
         PostAddress=postAddress;
         ContactNo=contactNo;
+    }
+    public void setByteImage(Bitmap byteImage) {
+        this.byteImage = byteImage;
+    }
 
-
-
+    public Bitmap getByteImage() {
+        return byteImage;
     }
 
     public String getHouseNo() {
@@ -70,9 +84,7 @@ public class TaskItem implements Serializable {
         return isBachelor;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
+
 
 
     @Override

@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import static com.example.user.tolet.PostAdd.dbH;
+import java.net.URI;
+
+import static com.example.user.tolet.MainActivity.dbH;
 
 public class AdPage extends AppCompatActivity {
     TextView textView1;
@@ -49,13 +51,17 @@ public class AdPage extends AppCompatActivity {
        // BitmapDrawable bitmapDrawable = new BitmapDrawable(taskItem.bitmap);
 
        // imageView.setImageDrawable(d);
-        if(taskItem.byteImage!=null) {
-            Bitmap bmp = BitmapFactory.decodeByteArray(taskItem.byteImage, 0, taskItem.byteImage.length);
-            imageView.setImageBitmap(Bitmap.createScaledBitmap(bmp, imageView.getWidth(),
-                    imageView.getHeight(), false));
-        }
+         //   if(taskItem.getByteImage()!=null)
+          //      Bitmap bmp = BitmapFactory.decodeByteArray(taskItem.byteImage, 0, taskItem.byteImage.length);
+         //    imageView.setImageBitmap(Bitmap.createScaledBitmap(taskItem.byteImage, imageView.getWidth(),
+          //      imageView.getHeight(), false));
+//
             //  imageView.setImageURI(taskItem.imageArray.get(1));
       //  if(taskItem.imageArray.get(0)!=null)
-         //   imageView.setImageURI(Uri.parse(taskItem.imageArray.get(0)));
+        Uri imageUri;
+        if(taskItem.getImageUri()!=null){
+            imageUri=Uri.parse(taskItem.getImageUri());
+            imageView.setImageURI(imageUri);
+        }
     }
 }
