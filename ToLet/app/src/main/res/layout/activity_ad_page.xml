@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:background="?android:attr/colorActivatedHighlight"
             android:elevation="0dp"
+            android:onClick="sendPage"
             android:text="ভাড়া চাই"
             android:textAlignment="center" />
 

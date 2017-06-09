@@ -6,8 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,11 +22,12 @@ public class AdPage extends AppCompatActivity {
     TextView textView1;
     ImageView imageView;
     TaskItem taskItem;
+    Button button;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ad_page);
-
+        button=(Button)findViewById(R.id.btn);
         textView1=(TextView)findViewById(R.id.details);
         imageView=(ImageView)findViewById(R.id.imageView2);
         //textView2=(TextView)findViewById(R.id.textView4);
@@ -63,5 +67,14 @@ public class AdPage extends AppCompatActivity {
             imageUri=Uri.parse(taskItem.getImageUri());
             imageView.setImageURI(imageUri);
         }
+
+    }
+    public void sendPage(View view) {
+
+        //setContentView(R.layout.activity_post_add);
+        Intent intent=new Intent(this,MainActivity.class);
+        TextView textView;
+        startActivity(intent);
+        //   adapter.notifyDataSetChanged();
     }
 }
