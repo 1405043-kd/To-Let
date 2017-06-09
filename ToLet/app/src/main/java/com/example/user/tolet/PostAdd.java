@@ -162,5 +162,14 @@ public class PostAdd extends AppCompatActivity {
 
         intent.putExtra("postObject", taskItem);
         startActivity(intent);
+        taskItem.HouseNo = "";
+        taskItem.RoadNo = "";
+        taskItem.Thana = "";
+        taskItem.District = "";
+        taskItem.PostAddress = "";
+        taskItem.isBachelor = "";
+        taskItem.ContactNo = "";
+        taskItem.ImageUri= "";
+
     }
 }

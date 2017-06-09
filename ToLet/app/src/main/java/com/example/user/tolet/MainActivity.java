@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     public class Addap extends ArrayAdapter<TaskItem>{
         public Addap() {
             super(getApplicationContext(), R.layout.task_row,ad.items);
-            TaskItem tItem=new TaskItem();
+
          //   tItem.ContactNo="3";
         //    dbH.insertData(tItem);
         //    ad.items.add(tItem);
@@ -135,13 +135,15 @@ public class MainActivity extends AppCompatActivity {
           //  ad.items.add(tItem);
             //ad.items.add(taskItem);
             //Cursor nia basically ekhane kisu code thaka uchit
+            TextView texView=(TextView) findViewById(R.id.textView8);
             if(firstDone==0) {
                 ad.items.clear();
                 Cursor cursor = dbH.getAsRequested("SELECT * FROM ads_info");
                 cursor.moveToFirst();
+              //  cursor.moveToNext();
                 //    String x="";
-                while (cursor.isAfterLast() == false) {
-                    //    //   x = String.valueOf(cursor.getColumnIndex("CONTACT"));
+                while (!cursor.isAfterLast()) {
+                    TaskItem tItem=new TaskItem();
                     tItem.HouseNo = cursor.getString(cursor.getColumnIndex("HOUSE"));
                     tItem.RoadNo = cursor.getString(cursor.getColumnIndex("ROAD"));
                     tItem.Thana = cursor.getString(cursor.getColumnIndex("THANA"));
@@ -150,14 +152,15 @@ public class MainActivity extends AppCompatActivity {
                     tItem.isBachelor = cursor.getString(cursor.getColumnIndex("ISBACHELOR"));
                     tItem.ContactNo = cursor.getString(cursor.getColumnIndex("CONTACT"));
                     tItem.ImageUri=cursor.getString(cursor.getColumnIndex("IMAGE"));
-                    cursor.moveToNext();
                     ad.items.add(tItem);
-                }
+                    cursor.moveToNext();
 
+                }
+                cursor.close();
                 firstDone=33;
             }
          //   String x= String.valueOf(cursor.getColumnIndex("CONTACT"));
-            TextView texView=(TextView) findViewById(R.id.textView8);
+
           //  texView.setText(x);
         }
 

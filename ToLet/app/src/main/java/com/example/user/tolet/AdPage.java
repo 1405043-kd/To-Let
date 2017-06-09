@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.net.URI;
 
@@ -72,9 +73,11 @@ public class AdPage extends AppCompatActivity {
     public void sendPage(View view) {
 
         //setContentView(R.layout.activity_post_add);
+       // Toast.makeText(getApplicationContext(),"বাড়িওয়ালাকে জানানো হল",Toast.LENGTH_LONG);
         Intent intent=new Intent(this,MainActivity.class);
         TextView textView;
         startActivity(intent);
+        Toast.makeText(getApplicationContext(),"বাড়িওয়ালাকে জানানো হল",Toast.LENGTH_LONG).show();
         //   adapter.notifyDataSetChanged();
     }
 }
