@@ -8,27 +8,35 @@
     android:orientation="vertical"
     tools:context="com.example.user.tolet.MainActivity">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1.60"
-        android:onClick="sendMessage"
-        android:text="Post New Ad" />
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1.60"
-        android:text="TextView"
+        android:background="@android:color/holo_green_dark"
+        android:gravity="center_vertical"
+        android:text="সকল বিজ্ঞপ্তি"
+        android:textAlignment="center"
+        android:textColorHint="@android:color/holo_blue_light"
+        android:textSize="24sp"
+        android:textStyle="bold"
         android:visibility="visible" />
 
     <ListView
         android:id="@+id/listV"
         android:layout_width="match_parent"
-        android:layout_height="340dp"
+        android:layout_height="360dp"
         android:visibility="visible" />
+
+    <Button
+        android:id="@+id/button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1.60"
+        android:background="@color/colorPrimaryDark"
+        android:onClick="sendMessage"
+        android:text="নতুন বিজ্ঞপ্তি দিন" />
 
     <LinearLayout
         android:id="@+id/linLay"

@@ -173,8 +173,8 @@ public class MainActivity extends AppCompatActivity {
             t1=(TextView)v.findViewById(R.id.ba);
             t2=(TextView)v.findViewById(R.id.baa);
             imageBun=(ImageView) v.findViewById(R.id.xxx);
-            t1.setText(ad.items.get(position).getHouseNo());
-            t2.setText(ad.items.get(position).getContactNo());
+            t2.setText(ad.items.get(position).getHouseNo()+"\n"+ad.items.get(position).getRoadNo()+"\n"+ad.items.get(position).getDistrict());
+            t1.setText(ad.items.get(position).getContactNo());
 
 
            // ad.items.get(position).getHouseNo();

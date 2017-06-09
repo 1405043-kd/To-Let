@@ -4,16 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="true"
-    tools:context="com.example.user.tolet.PostAdd">
+    android:clipToPadding="true">
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="0dp"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="House No."
+            android:hint="বাড়ি নং"
             android:inputType="textPersonName" />
 
         <EditText
@@ -39,8 +35,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Road"
-            android:inputType="textMultiLine" />
+            android:hint="রোড "
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="-7dp"
+            tools:layout_editor_absoluteY="105dp" />
 
         <EditText
             android:id="@+id/Thana"
@@ -48,7 +46,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Thana"
+            android:hint="থানা"
             android:inputType="textPersonName"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
@@ -59,7 +57,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="District"
+            android:hint="জেলা"
             android:inputType="textPersonName" />
 
         <EditText
@@ -68,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Postal Address"
+            android:hint="পোস্ট কোড"
             android:inputType="textPostalAddress" />
 
         <EditText
@@ -77,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Contact No."
+            android:hint="যোগাযোগের নাম্বার"
             android:inputType="phone" />
 
         <CheckBox
@@ -86,7 +84,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:elevation="24dp"
-            android:text="Bachelor" />
+            android:text="ব্যাচেলর" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -98,10 +96,13 @@
                 android:id="@+id/currState"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:text="Current State of House"
+                android:gravity="center|fill"
+                android:text="ছবি যোগ করুন"
                 android:textAlignment="center"
-                android:textSize="24sp" />
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <ImageButton
                 android:id="@+id/imageButtonPic"
@@ -116,8 +117,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/holo_blue_dark"
             android:onClick="sendMessage"
-            android:text="Post Ad"
+            android:text="পোস্ট করুন"
             android:textSize="18sp"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
@@ -126,10 +128,11 @@
 
     <ImageView
         android:id="@+id/imageV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="16dp" />
+        android:layout_width="410dp"
+        android:layout_height="111dp"
+        android:foregroundGravity="center_vertical"
+        app:srcCompat="@drawable/tt"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="15dp" />
 
 </android.support.constraint.ConstraintLayout>

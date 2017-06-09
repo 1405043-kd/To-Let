@@ -97,8 +97,8 @@ public class PostAdd extends AppCompatActivity {
 
             Uri selectedImage = data.getData();
             strURI = selectedImage.toString();
-            Uri imageUri = Uri.parse(strURI);
-            imageView.setImageURI(imageUri);
+         //   Uri imageUri = Uri.parse(strURI);
+          //  imageView.setImageURI(imageUri);
        //     String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
        //     Cursor cursor = getContentResolver().query(selectedImage,
